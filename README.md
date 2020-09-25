@@ -49,6 +49,7 @@ We now host a set of containers in a public repository. You can find details abo
 
 ```sh
 docker run \
+  -e TOKEN="$(cat ~/.emulator_console_auth_token)" \
   -e ADBKEY="$(cat ~/.android/adbkey)" \
   --device /dev/kvm \
   --publish 8554:8554/tcp \
@@ -78,6 +79,7 @@ If you wish to use this in a script you could do the following:
 
 ```sh
 docker run -d \
+  -e TOKEN="$(cat ~/.emulator_console_auth_token)" \
   -e ADBKEY="$(cat ~/.android/adbkey)" \
   --device /dev/kvm \
   --publish 8554:8554/tcp \
@@ -212,7 +214,8 @@ We provide the following run script:
 
 It does the following:
 
-    docker run -e ADBKEY="$(cat ~/.android/adbkey)" \
+    docker run -e TOKEN="$(cat ~/.emulator_console_auth_token)" \
+    -e ADBKEY="$(cat ~/.android/adbkey)" \
     --device /dev/kvm \
     --publish 8554:8554/tcp \
     --publish 5555:5555/tcp <docker-image-id>
